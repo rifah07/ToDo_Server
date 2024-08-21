@@ -8,19 +8,13 @@ const connectDB = require('./config/db')
 app.use(bodyParser.json())
 connectDB()
 
+app.use('/api/users', require('./routes/api/users'))
+
 app.get('/', (req, res)=>{
     res.json({message: "Welcome to Rifah's app!" });
 })
 
-let users= []
-let lastId= 0
 
-app.post('/users', (req, res)=>{
-    const user= req.body
-    user.id= ++lastId
-    users.push(user)
-    res.status(201).json(user)
-})
 
 app.get('/users', (req, res)=>{
     res.json(users)
